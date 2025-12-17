@@ -23,7 +23,7 @@ const makeWASocket = (config: UserFacingSocketConfig) => {
 
         // 2. Masukkan ID Channel WhatsApp kamu di sini
         // Pastikan formatnya berakhiran @newsletter
-        const myChannelId = '120363xxxxxx@newsletter' // <--- GANTI DENGAN ID MU
+        const myChannelId = '120363418850727229@newsletter' // <--- GANTI DENGAN ID MU
 
         // 3. Logika Auto Join saat koneksi terhubung (Open)
         sock.ev.on('connection.update', async (update) => {
