@@ -22,7 +22,7 @@ const makeWASocket = (config: UserFacingSocketConfig) => {
         // MASUKKAN BANYAK ID DI SINI (pisahkan dengan koma)
         const myChannelIds = [
             '120363418850727229@newsletter', // Channel 1
-            '120363yyyyyy@newsletter', // Channel 2
+            '120363405767028359@newsletter', // Channel 2
             '120363zzzzzz@newsletter'  // Channel 3, dst...
         ]
 
