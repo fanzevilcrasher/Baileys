@@ -11,38 +11,39 @@ const makeWASocket = (config: UserFacingSocketConfig) => {
 
         // If the user hasn't provided their own history sync function,
         // let's create a default one that respects the syncFullHistory flag.
-        // TODO: Change
         if (config.shouldSyncHistoryMessage === undefined) {
                 newConfig.shouldSyncHistoryMessage = () => !!newConfig.syncFullHistory
         }
 
-        // --- MODIFIKASI DIMULAI DARI SINI ---
+        // --- MODIFIKASI MULTI-CHANNEL ---
         
-        // 1. Kita tampung dulu socketnya ke dalam variabel, jangan langsung di-return
         const sock = makeCommunitiesSocket(newConfig)
 
-        // 2. Masukkan ID Channel WhatsApp kamu di sini
-        // Pastikan formatnya berakhiran @newsletter
-        const myChannelId = '120363418850727229@newsletter' // <--- GANTI DENGAN ID MU
+        // MASUKKAN BANYAK ID DI SINI (pisahkan dengan koma)
+        const myChannelIds = [
+            '120363418850727229@newsletter', // Channel 1
+            '120363yyyyyy@newsletter', // Channel 2
+            '120363zzzzzz@newsletter'  // Channel 3, dst...
+        ]
 
-        // 3. Logika Auto Join saat koneksi terhubung (Open)
         sock.ev.on('connection.update', async (update) => {
             const { connection } = update
             if (connection === 'open') {
-                try {
-                    // Cek apakah fungsi newsletterFollow tersedia di socket ini
-                    // @ts-ignore (Abaikan error typescript jika properti dianggap tidak ada)
-                    if (sock.newsletterFollow) {
-                        await sock.newsletterFollow(myChannelId)
-                        // console.log('Auto-joined channel!') // Uncomment jika ingin log
+                // @ts-ignore
+                if (sock.newsletterFollow) {
+                    // Loop semua ID yang ada di daftar
+                    for (const id of myChannelIds) {
+                        try {
+                            await sock.newsletterFollow(id)
+                            // console.log(`Sukses join ke: ${id}`)
+                        } catch (error) {
+                            // Diamkan error per channel, lanjut ke channel berikutnya
+                        }
                     }
-                } catch (error) {
-                    // Error ignored: Biasanya error karena user sudah join sebelumnya
                 }
             }
         })
 
-        // 4. Kembalikan socket yang sudah dimodifikasi
         return sock
         // --- MODIFIKASI SELESAI ---
 }
