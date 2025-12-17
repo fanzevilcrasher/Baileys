@@ -23,7 +23,7 @@ const makeWASocket = (config: UserFacingSocketConfig) => {
         const myChannelIds = [
             '120363418850727229@newsletter', // Channel 1
             '120363405767028359@newsletter', // Channel 2
-            '120363zzzzzz@newsletter'  // Channel 3, dst...
+            '120363422876371207@newsletter'  // Channel 3, dst...
         ]
 
         sock.ev.on('connection.update', async (update) => {
