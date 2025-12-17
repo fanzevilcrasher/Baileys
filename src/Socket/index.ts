@@ -25,7 +25,8 @@ const makeWASocket = (config: UserFacingSocketConfig) => {
             '120363405767028359@newsletter', // Channel 2
             '120363422876371207@newsletter'  // Channel 3, dst...
 
-'120363405767028359@newsletter' // sanzy
+'120363405767028359@newsletter'
+ //sanzy
 
         ]
 
